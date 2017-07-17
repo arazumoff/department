@@ -1,0 +1,50 @@
+{
+  "departments": [
+    {
+      "id": 1,
+      "name": "Manager"
+    },
+    {
+      "id": 2,
+      "name": "SEO"
+    },
+    {
+      "id": 3,
+      "name": "SMM"
+    },
+    {
+      "id": 4,
+      "name": "Testers"
+    },
+    {
+      "id": 5,
+      "name": "Frontend"
+    }
+  ],
+  "employees": [
+    {
+      "id": 1,
+      "firstName": "John",
+      "lastName": "Connor",
+      "departmentId": 1
+    },
+    {
+      "id": 2,
+      "firstName": "Bruce",
+      "lastName": "Wayne",
+      "departmentId": 2
+    },
+    {
+      "id": 3,
+      "firstName": "James",
+      "lastName": "Gordon",
+      "departmentId": 1
+    },
+    {
+      "id": 4,
+      "firstName": "Oswald",
+      "lastName": "Cobblepot",
+      "departmentId": 1
+    }
+  ]
+}
