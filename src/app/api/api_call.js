@@ -18,11 +18,19 @@ const callApi=(endpoint, params=null)=>{
 }
 
 export const fetchDepartments = () => callApi(`departments/`)
-export const fetchEmployees = () => callApi(`employees/`)
+export const fetchEmployees = () => callApi(`employees/?_expand=department`)
 export const updateDepartment = (item) => callApi(`departments/${item.id}/`, {
     method:'PUT',
     headers:{
        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(item)
+})
+
+export const updateEmployee = (item) => callApi(`employees/${item.id}/?_expand=department`, {
+    method:'PUT',
+    headers:{
+        'Content-Type': 'application/json'
     },
     body: JSON.stringify(item)
 })

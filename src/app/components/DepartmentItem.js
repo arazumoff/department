@@ -39,7 +39,7 @@ class DepartmentItem extends React.Component{
             html = (
                 <tr>
                 <td>{department.id}</td>
-                <td><input type="text" value={this.state.name} onChange={(e)=> this.handleChange(e)}/></td>
+                <td><input type="text" className="form-control" value={this.state.name} onChange={(e)=> this.handleChange(e)}/></td>
                 <td>
                     <button className="btn" onClick={(e) => this.handleSubmit(e)}>Save</button>
                     <button className="btn" onClick={(e) => this.setState({isEdit:false})}>Cancel</button>

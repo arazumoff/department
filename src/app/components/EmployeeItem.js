@@ -1,5 +1,6 @@
 import React from 'react';
 import shallowCompare from 'react-addons-shallow-compare';
+import SelectBox from "./SelectBox";
 
 class EmployeeItem extends React.Component{
 
@@ -8,9 +9,11 @@ class EmployeeItem extends React.Component{
         const {employee} = props;
         this.state = {
             isEdit: false,
+            id: employee.id,
             firstName: employee.firstName,
             lastName: employee.lastName,
-            departmentId: employee.departmentId
+            departmentId: employee.departmentId,
+            departmentName: employee.department.name
         };
     }
 
@@ -25,17 +28,24 @@ class EmployeeItem extends React.Component{
     }
 
     handleSubmit(event){
-        this.setState({isEdit:false})
+        const {onUpdate} = this.props;
+        onUpdate(this.state);
+        this.setState({isEdit:false});
+    }
+
+    handleSelect=(value, text)=>{
+        const {department, onUpdate} = this.props;
+        this.setState(Object.assign({}, this.state, {departmentId: value, departmentName: text}));
     }
 
     render(){
         const {employee} = this.props;
         let html = (
             <tr>
-                <td>{employee.id}</td>
-                <td>{employee.firstName}</td>
-                <td>{employee.lastName}</td>
-                <td>{employee.departmentId}</td>
+                <td>{this.state.id}</td>
+                <td>{this.state.firstName}</td>
+                <td>{this.state.lastName}</td>
+                <td>{this.state.departmentName}</td>
                 <td><button className="btn" onClick={(e) => this.setState({isEdit:true})}>Edit</button></td>
             </tr>
         )
@@ -43,9 +53,9 @@ class EmployeeItem extends React.Component{
             html = (
                 <tr>
                     <td>{employee.id}</td>
-                    <td><input type="text" name="firstName" value={this.state.firstName} onChange={(e)=> this.handleChange(e)}/></td>
-                    <td><input type="text" name="lastName" value={this.state.lastName} onChange={(e)=> this.handleChange(e)}/></td>
-                    <td>{employee.departmentId}</td>
+                    <td><input type="text" className="form-control" name="firstName" value={this.state.firstName} onChange={(e)=> this.handleChange(e)}/></td>
+                    <td><input type="text"  className="form-control" name="lastName" value={this.state.lastName} onChange={(e)=> this.handleChange(e)}/></td>
+                    <td><SelectBox selected={employee.departmentId} onSelect={this.handleSelect}/></td>
                     <td>
                         <button className="btn" onClick={(e) => this.handleSubmit(e)}>Save</button>
                         <button className="btn" onClick={(e) => this.setState({isEdit:false})}>Cancel</button>

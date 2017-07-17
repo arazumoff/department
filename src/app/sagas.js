@@ -24,7 +24,6 @@ export function* fetchEmployees(action){
 
 export function* updateDepartment(action){
     try {
-        console.log(action);
         const department = yield call(Api.updateDepartment, action.item);
         yield put({type: ActionTypes.DEPARTMENT_UPDATE_SUCCEEDED, department: department});
     } catch (error) {
@@ -32,10 +31,21 @@ export function* updateDepartment(action){
     }
 }
 
+export function* updateEmployee(action){
+    try {
+        const department = yield call(Api.updateEmployee, action.item);
+        yield put({type: ActionTypes.EMPLOYEE_UPDATE_SUCCEEDED, department: department});
+    } catch (error) {
+        yield put({type: ActionTypes.EMPLOYEE_UPDATE_FAILED, error});
+    }
+}
+
+
 function* rootSaga() {
     yield takeLatest(ActionTypes.DEPARTMENTS_FETCH_REQUESTED, fetchDepartments);
     yield takeLatest(ActionTypes.EMPLOYEES_FETCH_REQUESTED, fetchEmployees);
     yield takeLatest(ActionTypes.DEPARTMENT_UPDATE_REQUESTED, updateDepartment);
+    yield takeLatest(ActionTypes.EMPLOYEE_UPDATE_REQUESTED, updateEmployee);
 }
 
 export default rootSaga;

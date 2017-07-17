@@ -10,9 +10,15 @@ class EmployeeList extends React.Component{
         dispatch({type: ActionTypes.EMPLOYEES_FETCH_REQUESTED});
     }
 
+    _onUpdate = (item)=>{
+        const { dispatch } = this.props;
+        console.log('update', item);
+        dispatch({type: ActionTypes.EMPLOYEE_UPDATE_REQUESTED, item});
+    }
+
     render(){
         const {employees} = this.props;
-        const html = employees.map(item=> <EmployeeItem key={item.id} employee={item}/>)
+        const html = employees.map(item=> <EmployeeItem onUpdate={this._onUpdate} key={item.id} employee={item}/>)
         return (
             <table className="table">
                 <thead>
